@@ -1,10 +1,11 @@
-package com.example.tastypizzaclient
+package com.example.tastypizzaclient.contacts
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tastypizzaclient.R
 
 class FragmentContacts : Fragment() {
 

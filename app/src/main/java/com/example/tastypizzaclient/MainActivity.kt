@@ -1,35 +1,48 @@
 package com.example.tastypizzaclient
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.tastypizzaclient.contacts.FragmentContacts
 import com.example.tastypizzaclient.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
+import com.example.tastypizzaclient.menu.FragmentMenu
+import com.example.tastypizzaclient.orders.FragmentOrders
+import com.example.tastypizzaclient.profile.FragmentProfile
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val fragList = listOf(FragmentMenu.newInstance(),
+    private val fragList = listOf(
+        FragmentMenu.newInstance(),
         FragmentProfile.newInstance(),
         FragmentOrders.newInstance(),
         FragmentContacts.newInstance()
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tabMenu.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                supportFragmentManager.beginTransaction().replace(R.id.viewPager,fragList[tab?.position!!]).commit()
-                Toast.makeText(this@MainActivity,"Tab selected: ${tab.text}", Toast.LENGTH_SHORT).show()
-            }
+        replaceFragment(fragList[0])
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu -> replaceFragment(fragList[0])
+                R.id.profile -> replaceFragment(fragList[1])
+                R.id.basket -> replaceFragment(fragList[2])
+                R.id.contacts -> replaceFragment(fragList[3])
+                else -> {
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
             }
+            true
+        }
+    }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-        })
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
     }
 
 

@@ -12,4 +12,7 @@
     <string name="fragment_menu">fragment_menu</string>
     <string name="fragment_orders">fragment_orders</string>
     <string name="fragment_contacts">fragment_contacts</string>
+    <string name="email_input">Введите email</string>
+    <string name="password_input">Введите пароль</string>
+    <string name="logIn">Войти</string>
 </resources>
