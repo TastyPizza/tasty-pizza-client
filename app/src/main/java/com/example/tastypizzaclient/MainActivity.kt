@@ -8,7 +8,6 @@ import com.example.tastypizzaclient.databinding.ActivityMainBinding
 import com.example.tastypizzaclient.menu.FragmentMenu
 import com.example.tastypizzaclient.orders.FragmentOrders
 import com.example.tastypizzaclient.profile.FragmentProfile
-import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
