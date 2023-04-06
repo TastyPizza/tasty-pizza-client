@@ -15,4 +15,8 @@
     <string name="email_input">Введите email</string>
     <string name="password_input">Введите пароль</string>
     <string name="logIn">Войти</string>
+    <string name="dish1_desc">Поджаристая чиабатта и знакомое сочетание ветчины, цыпленка, моцареллы со свежими томатами и соусом ранч</string>
+    <string name="dish1_name">Тостер Карри</string>
+    <string name="dish1_price">99 ₽</string>
+    <string name="image_alt">Image with food</string>
 </resources>
