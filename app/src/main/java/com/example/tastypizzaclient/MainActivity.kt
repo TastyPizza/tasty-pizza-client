@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         LoginFragment.newInstance()
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
