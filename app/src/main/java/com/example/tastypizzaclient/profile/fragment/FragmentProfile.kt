@@ -1,4 +1,4 @@
-package com.example.tastypizzaclient.profile
+package com.example.tastypizzaclient.profile.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

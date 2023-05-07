@@ -25,5 +25,8 @@
     <string name="RegisterButton">Регистрация</string>
     <string name="LoginButton">Авторизация</string>
     <string name="prompt_email">Email</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="phone_number">Телефон</string>
 
 </resources>

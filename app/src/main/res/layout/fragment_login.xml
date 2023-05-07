@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.LoginFragment"
+    tools:context=".profile.fragment.LoginFragment"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_input_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -25,18 +26,22 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/authorization_button_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/LoginButton" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +49,7 @@
             android:layout_marginTop="450dp">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/registration_button_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/RegisterButton" />
