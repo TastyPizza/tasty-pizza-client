@@ -27,12 +27,17 @@ class LoginFragment : Fragment() {
             println(email)
         }
         val registerButton  = view.findViewById<Button>(R.id.registration_button_sign_in)
-
+        registerButton.setOnClickListener {
+            switchLoginOnRegister()
+        }
         return view
     }
-    private fun switchLoginOnRegister(view: View){
+    private fun switchLoginOnRegister(){
         val fragment = RegisterFragment.newInstance()
-        val fragmentManager =
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
     }
     companion object {
 
