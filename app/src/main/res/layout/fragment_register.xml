@@ -100,9 +100,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="450dp">
+            android:layout_marginTop="100dp">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/authorization_button_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/LoginButton" />
