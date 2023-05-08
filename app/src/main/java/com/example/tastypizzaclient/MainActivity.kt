@@ -9,15 +9,18 @@ import com.example.tastypizzaclient.menu.FragmentMenu
 import com.example.tastypizzaclient.orders.FragmentOrders
 import com.example.tastypizzaclient.profile.fragment.FragmentProfile
 import com.example.tastypizzaclient.profile.fragment.LoginFragment
+import com.example.tastypizzaclient.profile.fragment.RegisterFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    val loginFragment = LoginFragment.newInstance()
+    val registerFragment = RegisterFragment.newInstance()
+
     private val fragList = listOf(
         FragmentMenu.newInstance(),
         FragmentProfile.newInstance(),
         FragmentOrders.newInstance(),
-        FragmentContacts.newInstance(),
-        LoginFragment.newInstance()
+        FragmentContacts.newInstance()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu -> replaceFragment(fragList[0])
-                R.id.profile -> replaceFragment(fragList[4])
+                R.id.profile -> replaceFragment(loginFragment)
                 R.id.basket -> replaceFragment(fragList[2])
                 R.id.contacts -> replaceFragment(fragList[3])
                 else -> {

@@ -16,6 +16,7 @@ import java.util.*
 
 class RegisterFragment : Fragment() {
     private lateinit var emailInput: TextInputLayout
+    private val mainActivity: MainActivity by lazy { requireActivity() as MainActivity }
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,10 +50,9 @@ class RegisterFragment : Fragment() {
         return view
     }
     private fun switchRegisterOnLogin(){
-        val fragment = LoginFragment.newInstance()
         val fragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.replace(R.id.frame_layout, mainActivity.loginFragment)
         fragmentTransaction.commit()
     }
     companion object {
