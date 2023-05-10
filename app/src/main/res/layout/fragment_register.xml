@@ -21,7 +21,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/prompt_email"
-            app:boxBackgroundColor="#F8E9FD">
+            app:boxBackgroundColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/firstname"
-            app:boxBackgroundColor="#F8E9FD">
+            app:boxBackgroundColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/lastname"
-            app:boxBackgroundColor="#F8E9FD">
+            app:boxBackgroundColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -68,20 +68,59 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/phone_number"
-            app:boxBackgroundColor="#F8E9FD">
+            app:boxBackgroundColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/show_date_picker_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:hint="@string/choose_date_registry"
+            app:boxBackgroundColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                tools:ignore="Deprecated" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/show_date_picker_button"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/gender_radio_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Выбрать дату"
-            android:layout_centerInParent="true"/>
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/male_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male_gender_registry"
+                android:buttonTint="@color/purple_500" />
+
+            <RadioButton
+                android:id="@+id/female_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female_gender_registry"
+                android:buttonTint="@color/purple_500"/>
+
+        </RadioGroup>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.tastypizzaclient.R
 
-class FragmentProfile : Fragment() {
+class ProfileFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -17,7 +17,7 @@ class FragmentProfile : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = FragmentProfile()
+        fun newInstance() = ProfileFragment()
 
     }
 }

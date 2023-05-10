@@ -1,6 +1,6 @@
-package com.example.tastypizzaclient.model
+package com.example.tastypizzaclient.model.request
 
-data class RegisterModel(
+data class RegisterRequest(
     val email: String,
     val isMale: Boolean = true,
     val firstName: String,

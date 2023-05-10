@@ -28,5 +28,9 @@
     <string name="firstname">Имя</string>
     <string name="lastname">Фамилия</string>
     <string name="phone_number">Телефон</string>
+    <string name="choose_date_registry">Выбрать дату рождения</string>
+    <string name="male_gender_registry">Мужской</string>
+    <string name="female_gender_registry">Женский</string>
+
 
 </resources>
