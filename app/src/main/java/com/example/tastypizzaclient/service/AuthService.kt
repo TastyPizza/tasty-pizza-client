@@ -19,18 +19,20 @@ class AuthService {
         .build()
     private val authApi: AuthApi = retrofit.create(AuthApi::class.java)
 
-    fun signIn(email: String): AuthResponse {
-        val authResponse = AuthResponse()
+    fun signIn(email: String, callback: (AuthResponse) -> Unit) {
+        var authResponse = AuthResponse()
         authApi.signIn(email = email).enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                authResponse.jwt = response.body()!!.jwt
+                authResponse.jwt = response.body()?.jwt.toString()
+                authResponse.errorMessage = response.body()?.errorMessage.toString()
+                callback(authResponse)
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                 Log.e("Error", "Что-то пошло не так", t)
+                callback(authResponse)
             }
         })
-        return authResponse
     }
 
     fun signUp(registerRequest: RegisterRequest): RegisterResponse{
