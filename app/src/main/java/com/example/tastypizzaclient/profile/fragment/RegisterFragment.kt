@@ -18,6 +18,8 @@ import com.example.tastypizzaclient.MainActivity
 import com.example.tastypizzaclient.R
 import com.example.tastypizzaclient.model.request.RegisterRequest
 import com.example.tastypizzaclient.retrofit.api.AuthApi
+import com.example.tastypizzaclient.service.AuthService
+import com.example.tastypizzaclient.util.Util
 import com.example.tastypizzaclient.util.Validator
 import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Retrofit
@@ -34,6 +36,9 @@ class RegisterFragment : Fragment() {
     private lateinit var registerButton: Button
     private lateinit var loginButton: Button
     private lateinit var dateForModel: String
+
+    private val authService: AuthService = AuthService()
+
     private var validator: Validator = Validator()
     private var emailValid: Boolean = false
     private var nameValid: Boolean = false
@@ -57,11 +62,6 @@ class RegisterFragment : Fragment() {
         phoneNumberInput = view.findViewById(R.id.phone_number_input_sign_up)
         picker = view.findViewById(R.id.show_date_picker_button)
         genderRadioGroup = view.findViewById(R.id.gender_radio_group)
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://158.160.23.54:21400/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val authApi = retrofit.create(AuthApi::class.java)
 
         validationForm()
 
@@ -90,18 +90,35 @@ class RegisterFragment : Fragment() {
             }
         }
 
-
-        val registerDTO = RegisterRequest(
-            emailInput.editText?.text.toString(),
-            isMale,
-            nameInput.editText?.text.toString(),
-            surnameInput.editText?.text.toString(),
-            phoneNumberInput.editText?.text.toString(),
-            picker.editText?.text.toString()
-        )
-
         registerButton = view.findViewById(R.id.registration_button_sign_up)
         registerButton.setOnClickListener {
+            val registerDTO = RegisterRequest(
+                emailInput.editText?.text.toString(),
+                isMale,
+                nameInput.editText?.text.toString(),
+                surnameInput.editText?.text.toString(),
+                phoneNumberInput.editText?.text.toString().replace(Regex("[^0-9]"), ""),
+                dateForModel
+            )
+            Log.d("request", registerDTO.toString())
+            authService.signUp(registerDTO) { registerResponse ->
+                when (registerResponse.errorMessage) {
+                    "200" -> {
+                        MainActivity.verifyToken = registerResponse.jwt
+                        mainActivity.replaceFragment(mainActivity.verificationFragment)
+                    }
+                    "409" -> {
+                        Util.showErrorDialog(
+                            requireContext(),
+                            "Аккаунт с данной почтой уже существует!"
+                        )
+                    }
+                    else -> {
+                        Log.d("CHTO","zashel")
+                        Util.showErrorDialog(requireContext(), "Произошло что-то не предвиденное")
+                    }
+                }
+            }
 
         }
         registerButton.isEnabled = false
@@ -243,7 +260,7 @@ class RegisterFragment : Fragment() {
         surnameValid = false
         phoneNumberValid = false
         pickerValid = false
-        Log.d("Дестрой", "${registerButton.isEnabled}")
+        Log.d("Дестрой в регистре", "${registerButton.isEnabled}")
         super.onDestroyView()
     }
 

@@ -15,6 +15,7 @@ import com.example.tastypizzaclient.R
 import com.example.tastypizzaclient.model.response.AuthResponse
 
 import com.example.tastypizzaclient.service.AuthService
+import com.example.tastypizzaclient.util.Util
 import com.example.tastypizzaclient.util.Validator
 import com.google.android.material.textfield.TextInputLayout
 
@@ -26,7 +27,6 @@ class LoginFragment : Fragment() {
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
     private var validator: Validator = Validator()
-    private lateinit var token: String
 
 
     @SuppressLint("MissingInflatedId")
@@ -41,8 +41,18 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             val email = emailInput.editText?.text.toString()
             authService.signIn(email) { authResponse ->
-                token = authResponse.jwt
-                Log.d("TAKKKKK", authResponse.jwt)
+                when (authResponse.errorMessage) {
+                    "200" -> {
+                        MainActivity.verifyToken = authResponse.jwt
+                        mainActivity.replaceFragment(mainActivity.verificationFragment)
+                    }
+                    "404" -> {
+                        Util.showErrorDialog(requireContext(), "Пользователь не найден")
+                    }
+                    else -> {
+                        Util.showErrorDialog(requireContext(), "Произошло что-то не предвиденное")
+                    }
+                }
             }
         }
         registerButton = view.findViewById(R.id.registration_button_sign_in)

@@ -31,6 +31,8 @@
     <string name="choose_date_registry">Выбрать дату рождения</string>
     <string name="male_gender_registry">Мужской</string>
     <string name="female_gender_registry">Женский</string>
+    <string name="sms_code">Код</string>
+    <string name="send_code">Отправить Код</string>
 
 
 </resources>
