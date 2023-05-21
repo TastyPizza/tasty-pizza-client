@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
                 when (authResponse.errorMessage) {
                     "200" -> {
                         MainActivity.verifyToken = authResponse.jwt
-                        mainActivity.replaceFragment(mainActivity.verificationFragment)
+                        mainActivity.replaceFragment(MainActivity.verificationFragment)
                     }
                     "404" -> {
                         Util.showErrorDialog(requireContext(), "Пользователь не найден")
@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
         registerButton = view.findViewById(R.id.registration_button_sign_in)
         loginButton.isEnabled = false
         registerButton.setOnClickListener {
-            mainActivity.replaceFragment(mainActivity.registerFragment)
+            mainActivity.replaceFragment(MainActivity.registerFragment)
         }
         validationForm()
         return view

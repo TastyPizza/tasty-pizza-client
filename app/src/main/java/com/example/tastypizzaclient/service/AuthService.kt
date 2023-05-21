@@ -3,6 +3,7 @@ package com.example.tastypizzaclient.service
 import android.media.session.MediaSession.Token
 import android.provider.ContactsContract.Profile
 import android.util.Log
+import com.example.tastypizzaclient.MainActivity
 import com.example.tastypizzaclient.model.request.RegisterRequest
 import com.example.tastypizzaclient.model.response.AuthResponse
 import com.example.tastypizzaclient.model.response.ProfileResponse
@@ -69,7 +70,6 @@ class AuthService {
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
-
                 registerResponse.jwt = response.body()?.jwt.toString()
                 registerResponse.errorMessage = response.code().toString()
                 callback(registerResponse)
@@ -80,7 +80,6 @@ class AuthService {
                 callback(registerResponse)
             }
         })
-        callback(registerResponse)
     }
 
     fun refreshTokens(refreshToken: String, callback: (TokenResponse) -> Unit) {
@@ -89,7 +88,16 @@ class AuthService {
     }
 
     fun getProfile(accessToken: String, callback: (ProfileResponse) -> Unit) {
-        val profileResponse = ProfileResponse()
-        callback(profileResponse)
+        authApi.getProfile(MainActivity.accessToken).enqueue(object : Callback<ProfileResponse> {
+            override fun onResponse(
+                call: Call<ProfileResponse>,
+                response: Response<ProfileResponse>
+            ) {
+                callback(response.body()!!)
+            }
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                Log.e("Error", "Что-то пошло не так", t)
+            }
+        })
     }
 }

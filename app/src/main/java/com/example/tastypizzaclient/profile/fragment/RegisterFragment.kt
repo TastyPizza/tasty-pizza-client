@@ -105,7 +105,7 @@ class RegisterFragment : Fragment() {
                 when (registerResponse.errorMessage) {
                     "200" -> {
                         MainActivity.verifyToken = registerResponse.jwt
-                        mainActivity.replaceFragment(mainActivity.verificationFragment)
+                        mainActivity.replaceFragment(MainActivity.verificationFragment)
                     }
                     "409" -> {
                         Util.showErrorDialog(
@@ -125,7 +125,7 @@ class RegisterFragment : Fragment() {
 
         loginButton = view.findViewById(R.id.authorization_button_sign_up)
         loginButton.setOnClickListener {
-            mainActivity.replaceFragment(mainActivity.loginFragment)
+            mainActivity.replaceFragment(MainActivity.loginFragment)
         }
 
         return view

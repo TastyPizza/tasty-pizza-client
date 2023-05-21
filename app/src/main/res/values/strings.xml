@@ -33,6 +33,7 @@
     <string name="female_gender_registry">Женский</string>
     <string name="sms_code">Код</string>
     <string name="send_code">Отправить Код</string>
+    <string name="birthday">День рождения</string>
 
 
 </resources>

@@ -9,48 +9,33 @@ import androidx.fragment.app.Fragment
 import com.example.tastypizzaclient.contacts.FragmentContacts
 import com.example.tastypizzaclient.databinding.ActivityMainBinding
 import com.example.tastypizzaclient.menu.FragmentMenu
+import com.example.tastypizzaclient.model.response.ProfileResponse
 import com.example.tastypizzaclient.orders.FragmentOrders
 import com.example.tastypizzaclient.profile.fragment.ProfileFragment
 import com.example.tastypizzaclient.profile.fragment.LoginFragment
 import com.example.tastypizzaclient.profile.fragment.RegisterFragment
 import com.example.tastypizzaclient.profile.fragment.VerificationFragment
+import com.example.tastypizzaclient.service.AuthService
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preference: SharedPreferences
 
-    val loginFragment = LoginFragment.newInstance()
-    val registerFragment = RegisterFragment.newInstance()
-    val menuFragment = FragmentMenu.newInstance()
-    val profileFragment = ProfileFragment.newInstance()
-    val ordersFragment = FragmentOrders.newInstance()
-    val contactsFragment = FragmentContacts.newInstance()
-    val verificationFragment = VerificationFragment.newInstance()
+    private val authService: AuthService = AuthService()
 
     val fragmentManager = supportFragmentManager
-
-    var fragList = mutableListOf(
-        menuFragment,
-        profileFragment,
-        ordersFragment,
-        contactsFragment
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        Log.d("ACC", accessToken)
-        Log.d("REF", refreshToken)
         loadData()
-        Log.d("ACC", accessToken)
-        Log.d("REF", refreshToken)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(fragList[0])
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu -> replaceFragment(fragList[0])
-                R.id.profile -> replaceFragment(loginFragment)
+                R.id.profile -> replaceFragment(fragList[1])
                 R.id.basket -> replaceFragment(fragList[2])
                 R.id.contacts -> replaceFragment(fragList[3])
                 else -> {
@@ -87,9 +72,29 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    private fun loadProfile(){
+        authService.getProfile(accessToken) { profileResponse ->
+            profileData = profileResponse
+        }
+    }
+
     companion object {
         var accessToken: String = "1"
         var refreshToken: String = "2"
         var verifyToken: String = "3"
+        lateinit var profileData: ProfileResponse
+        val loginFragment = LoginFragment.newInstance()
+        val registerFragment = RegisterFragment.newInstance()
+        val menuFragment = FragmentMenu.newInstance()
+        val profileFragment = ProfileFragment.newInstance()
+        val ordersFragment = FragmentOrders.newInstance()
+        val contactsFragment = FragmentContacts.newInstance()
+        val verificationFragment = VerificationFragment.newInstance()
+        var fragList = mutableListOf(
+            menuFragment,
+            loginFragment,
+            ordersFragment,
+            contactsFragment
+        )
     }
 }

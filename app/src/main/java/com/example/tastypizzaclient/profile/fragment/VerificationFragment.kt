@@ -38,6 +38,11 @@ class VerificationFragment : Fragment() {
                     "200" -> {
                         MainActivity.accessToken = tokenResponse.accessToken
                         MainActivity.refreshToken = tokenResponse.refreshToken
+                        authService.getProfile(MainActivity.accessToken) { profileResponse ->
+                            MainActivity.profileData = profileResponse
+                            Log.d("profile!!!",profileResponse.toString())
+                            mainActivity.replaceFragment(MainActivity.profileFragment)
+                        }
                     }
                     "400" -> {
                         Util.showErrorDialog(
