@@ -15,5 +15,16 @@ class Util {
                 .create()
             alertDialog.show()
         }
+
+        fun showUpdateDialog(context: Context, message: String) {
+            val alertDialog = AlertDialog.Builder(context)
+                .setTitle("Еще не доступно")
+                .setMessage(message)
+                .setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+            alertDialog.show()
+        }
     }
 }

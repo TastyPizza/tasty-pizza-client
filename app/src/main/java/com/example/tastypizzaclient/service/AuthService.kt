@@ -23,6 +23,24 @@ class AuthService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val authApi: AuthApi = retrofit.create(AuthApi::class.java)
+    fun signUp(registerRequest: RegisterRequest, callback: (RegisterResponse) -> Unit) {
+        val registerResponse = RegisterResponse()
+        authApi.signUp(registerRequest).enqueue(object : Callback<RegisterResponse> {
+            override fun onResponse(
+                call: Call<RegisterResponse>,
+                response: Response<RegisterResponse>
+            ) {
+                registerResponse.jwt = response.body()?.jwt.toString()
+                registerResponse.errorMessage = response.code().toString()
+                callback(registerResponse)
+            }
+
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                Log.e("Error", "Что-то пошло не так", t)
+                callback(registerResponse)
+            }
+        })
+    }
 
     fun signIn(email: String, callback: (AuthResponse) -> Unit) {
         var authResponse = AuthResponse()
@@ -63,27 +81,27 @@ class AuthService {
             })
     }
 
-    fun signUp(registerRequest: RegisterRequest, callback: (RegisterResponse) -> Unit) {
-        val registerResponse = RegisterResponse()
-        authApi.signUp(registerRequest).enqueue(object : Callback<RegisterResponse> {
-            override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
-            ) {
-                registerResponse.jwt = response.body()?.jwt.toString()
-                registerResponse.errorMessage = response.code().toString()
-                callback(registerResponse)
-            }
-
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                Log.e("Error", "Что-то пошло не так", t)
-                callback(registerResponse)
-            }
-        })
-    }
-
     fun refreshTokens(refreshToken: String, callback: (TokenResponse) -> Unit) {
         val tokenResponse = TokenResponse()
+        authApi.refreshToken(refreshToken = MainActivity.refreshToken)
+            .enqueue(object : Callback<TokenResponse> {
+                override fun onResponse(
+                    call: Call<TokenResponse>,
+                    response: Response<TokenResponse>
+                ) {
+                    tokenResponse.accessToken = response.body()?.accessToken.toString()
+                    tokenResponse.refreshToken = response.body()?.refreshToken.toString()
+                    tokenResponse.errorMessage = response.code().toString()
+                    callback(tokenResponse)
+                }
+
+                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+                    Log.e("Error", "Что-то пошло не так", t)
+                    tokenResponse.errorMessage = t.message.toString()
+                    callback(tokenResponse)
+                }
+
+            })
         callback(tokenResponse)
     }
 
@@ -93,8 +111,15 @@ class AuthService {
                 call: Call<ProfileResponse>,
                 response: Response<ProfileResponse>
             ) {
-                callback(response.body()!!)
+                var profileResponse = ProfileResponse()
+                if (response.code() == 200) {
+                    callback(response.body()!!)
+                }else {
+                    callback(profileResponse)
+                }
+
             }
+
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                 Log.e("Error", "Что-то пошло не так", t)
             }

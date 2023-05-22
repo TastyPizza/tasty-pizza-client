@@ -34,6 +34,9 @@
     <string name="sms_code">Код</string>
     <string name="send_code">Отправить Код</string>
     <string name="birthday">День рождения</string>
+    <string name="tastycoins">Tastycoins</string>
+    <string name="notification_profile">Нажмите, чтобы потратить</string>
+    <string name="exit_text">Выйти</string>
 
 
 </resources>

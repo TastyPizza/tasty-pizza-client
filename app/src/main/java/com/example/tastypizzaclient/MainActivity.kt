@@ -21,14 +21,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preference: SharedPreferences
 
-    private val authService: AuthService = AuthService()
-
     val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         loadData()
+        refreshToken()
+        loadProfile()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(fragList[0])
@@ -72,11 +72,6 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun loadProfile(){
-        authService.getProfile(accessToken) { profileResponse ->
-            profileData = profileResponse
-        }
-    }
 
     companion object {
         var accessToken: String = "1"
@@ -96,5 +91,27 @@ class MainActivity : AppCompatActivity() {
             ordersFragment,
             contactsFragment
         )
+        val authService: AuthService = AuthService()
+
+        fun loadProfile() {
+            authService.getProfile(accessToken) { profileResponse ->
+                profileData = profileResponse
+            }
+        }
+
+        fun refreshToken() {
+            authService.refreshTokens(refreshToken) { tokenResponse ->
+                when (tokenResponse.errorMessage) {
+                    "200" -> {
+                        accessToken = tokenResponse.accessToken
+                        refreshToken = tokenResponse.refreshToken
+                        fragList[1] = profileFragment
+                    }
+                    else -> {
+                        fragList[1] = loginFragment
+                    }
+                }
+            }
+        }
     }
 }
