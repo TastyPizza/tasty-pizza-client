@@ -7,34 +7,13 @@
         android:id="@+id/menu_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="100dp">
 
         <include
             layout="@layout/menu_item"
-            android:id="@+id/menu_item_1" />
+            android:id="@+id/menu_item_1"
+            android:visibility="gone"/>
 
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_2" />
-
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_3" />
-
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_4" />
-
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_5" />
-
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_6" />
-
-        <include
-            layout="@layout/menu_item"
-            android:id="@+id/menu_item_7" />
     </LinearLayout>
 </ScrollView>

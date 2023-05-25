@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView_dish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dodster"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/image_alt" />
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/imageView_dish"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            />
+
+        <TextView
+            android:id="@+id/textView_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/textView_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/textView_description"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/button_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/small_pizza"
+                android:textOff="@string/small_pizza"
+                android:textOn="@string/small_pizza"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_toggle_button"
+                android:checked="false"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/button_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medium_pizza"
+                android:textOff="@string/medium_pizza"
+                android:textOn="@string/medium_pizza"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_toggle_button"
+                android:checked="false"
+                android:layout_marginStart="16dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:layout_weight="1"/>
+
+
+            <ToggleButton
+                android:id="@+id/button_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/large_pizza"
+                android:textOff="@string/large_pizza"
+                android:textOn="@string/large_pizza"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_toggle_button"
+                android:checked="false"
+                android:layout_marginStart="16dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_to_cart"
+            android:layout_below="@id/button_layout"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

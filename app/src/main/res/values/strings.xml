@@ -39,4 +39,12 @@
     <string name="exit_text">Выйти</string>
 
 
+<!--    Тексты для кнопок в активити деталей блюда-->
+    <string name="small_pizza">Маленькая</string>
+    <string name="medium_pizza">Средняя</string>
+    <string name="large_pizza">Большая</string>
+    <string name="add_to_cart">Добавить в корзину</string>
+
+
+
 </resources>
