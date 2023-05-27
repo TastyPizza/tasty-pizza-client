@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.fragment.ProfileFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Заголовок "Корзина" -->
     <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Корзина"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:padding="16dp" />
+
+    <!-- Полоска -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <!-- Количество товаров и стоимость -->
+    <TextView
+        android:id="@+id/textView_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0 товаров на 0 рублей"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:padding="16dp" />
+
+    <!-- Список товаров в корзине -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/fragment_orders" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <!-- Пример элемента "menu_item" -->
+        <include layout="@layout/cart_item" />
+        <include layout="@layout/cart_item" />
+        <include layout="@layout/cart_item" />
+        <include layout="@layout/cart_item" />
+
+    </LinearLayout>
+    </ScrollView>
+
+    <!-- Кнопка "Оформить заказ" -->
+    <Button
+        android:id="@+id/button_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Оформить заказ"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@color/black"
+        android:padding="16dp" />
+
+</LinearLayout>

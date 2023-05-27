@@ -1,5 +1,6 @@
 package com.example.tastypizzaclient.menu
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import com.example.tastypizzaclient.MainActivity
 import com.example.tastypizzaclient.R
 import com.example.tastypizzaclient.activity.PizzaDetailsActivity
 import com.example.tastypizzaclient.model.MenuItem
@@ -19,6 +21,7 @@ import kotlinx.coroutines.launch
 
 class FragmentMenu : Fragment() {
     private val menuService: MenuService = MenuService()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -80,6 +83,7 @@ class FragmentMenu : Fragment() {
 
         val intent = Intent(requireContext(), PizzaDetailsActivity::class.java)
         intent.putExtra("menuItem", menuItem)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
