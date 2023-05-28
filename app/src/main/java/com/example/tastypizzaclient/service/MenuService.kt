@@ -70,6 +70,7 @@ class MenuService {
     }
 
     fun createOrder(request: CreateOrderRequest, callback: (Pair<Int?, Int?>) -> Unit) {
+        println("отправляем запрос на размещение заказа с токеном: ${MainActivity.accessToken}")
         menuApi.createOrder(MainActivity.accessToken, request).enqueue(object : Callback<Int> {
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 val orderId = response.body()

@@ -48,13 +48,13 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
             }
 
             val createOrderRequest = CreateOrderRequest(
-                clientId = 5,
+                clientId = 69,
                 restaurantId = 1,
                 listOfOrderItemDto = listOfOrderItemDto
             )
 
 
-            if (MainActivity.accessToken == "") showAlertDialog(this.requireContext(),"Ошибка", "Вы должны быть авторизированы для совершения заказа")
+            if (MainActivity.accessToken.length < 10) showAlertDialog(this.requireContext(),"Ошибка", "Вы должны быть авторизированы для совершения заказа")
             else if (!cartItems.isEmpty()){
                 menuService.createOrder(createOrderRequest) { result ->
                     val orderId = result.first
@@ -64,6 +64,12 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
                         // Запрос выполнен успешно
                         Log.d("Order", "Заказ создан. ID заказа: $orderId")
                         showAlertDialog(this.requireContext(),"Успех", "Заказ создан. ID заказа: $orderId")
+                    } else if (statusCode == 404) {
+                        Log.d("Order", "Недостаточно ингридиентов для заказа")
+                        showAlertDialog(this.requireContext(),"Упс :(", "Для указанных позиций нет нужного количества ингридиентов. Попробуйте уменьшить их количество или заказать что-то другое")
+                    } else if (statusCode == 403){
+                        Log.d("Order", "Ошибка авторизации")
+                        showAlertDialog(this.requireContext(),"Упс :(", "Похоже, что вы не авторизированы. Перейдите в раздел профиля и авторизируйтесь перед оформлением заказа")
 
                     } else {
                         // Обработка ошибки

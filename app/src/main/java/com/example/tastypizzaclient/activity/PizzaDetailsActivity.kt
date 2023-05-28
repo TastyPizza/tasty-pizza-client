@@ -140,8 +140,6 @@ class PizzaDetailsActivity : AppCompatActivity(){
 
             buttonAddToCart.setOnClickListener {
                 println("Нажали кнопку добавить в корзину "+item)
-
-
                 var selected: Int = -1
                 if (buttonSmall.isVisible && buttonSmall.isChecked) selected = 0
                 if (buttonMedium.isVisible && buttonMedium.isChecked) selected = 1
@@ -150,22 +148,18 @@ class PizzaDetailsActivity : AppCompatActivity(){
                 if (selected == -1){
                     showAlertDialog(this,"Ошибка", "Нужно выбрать опцию")
                 } else {
-
                     menuService.checkMenuItem(availableOptions[selected].id, 1) { statusCode ->
-                        if (statusCode == 200) {
+                        if (statusCode == 204) {
                             println("Запрос выполнен успешно")
                             MainActivity.addToCart(item,availableOptions[selected])
                             showAlertDialog(this,"Успех", "Добавлено в корзину")
-                        } else {
-
+                        } else if (statusCode == 404){
                             showAlertDialog(this,"Ошибка","Недостаточно ингредиентов для приготовления этого блюда в даный момент. Пожалуйста, выберите что-то другое")
+                        } else {
+                            showAlertDialog(this,"Ошибка","Мы без понятия что это за ошибка")
                         }
                     }
-
-//
-
                 }
-
             }
         }
     }
