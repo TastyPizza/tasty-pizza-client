@@ -148,6 +148,7 @@ class PizzaDetailsActivity : AppCompatActivity(){
                 if (selected == -1){
                     showAlertDialog(this,"Ошибка", "Нужно выбрать опцию")
                 } else {
+                    println("Выбрана такая опция:"+availableOptions[selected])
                     menuService.checkMenuItem(availableOptions[selected].id, 1) { statusCode ->
                         if (statusCode == 204) {
                             println("Запрос выполнен успешно")
