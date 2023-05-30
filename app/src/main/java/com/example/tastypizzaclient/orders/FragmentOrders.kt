@@ -28,7 +28,6 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_orders, container, false)
-        val linearLayoutItems = view.findViewById<LinearLayout>(R.id.linearLayout_items)
         val buttonCheckout = view.findViewById<Button>(R.id.button_checkout)
 
 
@@ -98,8 +97,8 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
     }
 
     override fun onOrderUpdated(item: CartItem) {
-
-        val existingItem = cartItems.find { it.menuItemId == item.menuItemId && it.menuOptionId == item.menuItemId}
+        println("Пытаемся добавить в корзину такой элемент: $item")
+        val existingItem = cartItems.find { it.menuItemId == item.menuItemId && it.menuOptionId == item.menuOptionId}
         if (existingItem == null) {
             cartItems.add(item)
             println("Делаем что-то во фрагменте, когда у нас добавился элемент в корзину")
