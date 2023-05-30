@@ -26,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.tastypizzaclient.activity.PizzaDetailsActivity"
+            android:label="Pizza Details" />
+
     </application>
     <uses-permission android:name="android.permission.INTERNET"
         tools:ignore="ManifestOrder" />

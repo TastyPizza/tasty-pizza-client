@@ -1,3 +1,13 @@
 package com.example.tastypizzaclient.model
 
-data class MenuItem(val title: String, val description: String, val price: String)
+import java.io.Serializable
+
+data class MenuItem(
+    val id: Int,
+    val title: String,
+    val description: String,
+    var price: String,
+    val priceInt: Int,
+    val type: String,
+    ) : Serializable
+
