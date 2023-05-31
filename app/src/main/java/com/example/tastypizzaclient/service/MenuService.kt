@@ -25,6 +25,13 @@ class MenuService {
         .build()
     private val menuApi: MenuApiService = retrofit.create(MenuApiService::class.java)
 
+//    private val ordersBaseURL: String = "http://ali-ibad.ru:8080/"
+//    private val ordersRetrofit: Retrofit = Retrofit.Builder()
+//        .baseUrl(ordersBaseURL)
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .build()
+//    private val ordersMenuApi: MenuApiService = ordersRetrofit.create(MenuApiService::class.java)
+
 
     fun getMenuItems(callback: (List<MenuItem>) -> Unit) {
         menuApi.getMenuItems().enqueue(object : Callback<List<MenuItemResponse>> {
@@ -84,6 +91,23 @@ class MenuService {
             }
         })
     }
+
+    //это для другого baseURL, для общего использовать метод выше
+//    fun createOrder(request: CreateOrderRequest, callback: (Pair<Int?, Int?>) -> Unit) {
+//        println("отправляем запрос на размещение заказа с токеном: ${MainActivity.accessToken}")
+//        ordersMenuApi.createOrder(MainActivity.accessToken, request).enqueue(object : Callback<Int> {
+//            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+//                val orderId = response.body()
+//                val statusCode = response.code()
+//                callback(Pair(orderId, statusCode))
+//            }
+//
+//            override fun onFailure(call: Call<Int>, t: Throwable) {
+//                Log.e("Error", "Что-то пошло не так", t)
+//                callback(Pair(null, -1))
+//            }
+//        })
+//    }
 
 
 
