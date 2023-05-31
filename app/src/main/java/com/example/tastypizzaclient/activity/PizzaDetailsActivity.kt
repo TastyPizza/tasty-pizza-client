@@ -41,7 +41,20 @@ class PizzaDetailsActivity : AppCompatActivity(){
         val buttonLarge = findViewById<ToggleButton>(R.id.button_large)
 
         menuItem?.let { item ->
-            imageViewDish.setImageResource(R.drawable.dodster)
+            when (item.type){
+                "PIZZA" -> {
+                    imageViewDish.setImageResource(R.drawable.pizza)
+
+                }
+                "DRINK" -> {
+                    imageViewDish.setImageResource(R.drawable.cocktail)
+
+                }
+                "SNACK" -> {
+                    imageViewDish.setImageResource(R.drawable.potato)
+
+                }
+            }
             textViewTitle.text = item.title
             textViewDescription.text = item.description
 

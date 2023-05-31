@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MenuService {
-    private val baseURL: String = "http://158.160.23.54:8080/"
+    private val baseURL: String = "https://ali-ibad.ru:8081/"
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseURL)
         .addConverterFactory(GsonConverterFactory.create())

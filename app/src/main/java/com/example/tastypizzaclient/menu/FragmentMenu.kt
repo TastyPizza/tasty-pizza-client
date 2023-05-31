@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
@@ -57,6 +58,10 @@ class FragmentMenu : Fragment() {
             itemView.findViewById<TextView>(R.id.menu_item_title).text = menuItem.title
             itemView.findViewById<TextView>(R.id.menu_item_description).text = menuItem.description
             itemView.findViewById<TextView>(R.id.menu_item_price).text = menuItem.price
+            val imageView = itemView.findViewById<ImageView>(R.id.menu_item_image)
+            if (menuItem.type == "PIZZA") imageView.setImageResource(R.drawable.pizza)
+            if (menuItem.type == "SNACK") imageView.setImageResource(R.drawable.potato)
+            if (menuItem.type == "DRINK") imageView.setImageResource(R.drawable.cocktail)
 
 
 

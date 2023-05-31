@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.tastypizzaclient.MainActivity
@@ -66,7 +67,7 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
                     } else if (statusCode == 404) {
                         Log.d("Order", "Недостаточно ингридиентов для заказа")
                         showAlertDialog(this.requireContext(),"Упс :(", "Для указанных позиций нет нужного количества ингридиентов. Попробуйте уменьшить их количество или заказать что-то другое")
-                    } else if (statusCode == 403){
+                    } else if (statusCode == 403 || statusCode == 401){
                         Log.d("Order", "Ошибка авторизации")
                         showAlertDialog(this.requireContext(),"Упс :(", "Похоже, что вы не авторизированы. Перейдите в раздел профиля и авторизируйтесь перед оформлением заказа")
 
@@ -143,6 +144,19 @@ class FragmentOrders : Fragment(), OrderUpdateListener {
             val dishTypeView = cartItemView.findViewById<TextView>(R.id.textView_dish_type)
             val quantityTextView = cartItemView.findViewById<TextView>(R.id.textView_quantity)
             val priceTextView = cartItemView.findViewById<TextView>(R.id.item_price)
+            val imageView = cartItemView.findViewById<ImageView>(R.id.imageView_dish)
+
+            when (item.type){
+                "PIZZA" -> {
+                    imageView.setImageResource(R.drawable.pizza)
+                }
+                "DRINK" -> {
+                    imageView.setImageResource(R.drawable.cocktail)
+                }
+                "SNACK" -> {
+                    imageView.setImageResource(R.drawable.potato)
+                }
+            }
 
 
             var type: String = ""
